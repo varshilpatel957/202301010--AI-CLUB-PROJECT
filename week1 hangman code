@@ -1,0 +1,108 @@
+import random
+def display_hangman(wrong_guesses):
+    stages = [
+        '''
+           --------
+           |      |
+           |
+           |
+           |
+           |
+        ''',
+        '''
+           --------
+           |      |
+           |      O
+           |
+           |
+           |
+        ''',
+        '''
+           --------
+           |      |
+           |      O
+           |      |
+           |
+           |
+        ''',
+        '''
+           --------
+           |      |
+           |      O
+           |     /|
+           |
+           |
+        ''',
+        '''
+           --------
+           |      |
+           |      O
+           |     /|\\
+           |
+           |
+        ''',
+        '''
+           --------
+           |      |
+           |      O
+           |     /|\\
+           |     /
+           |
+        ''',
+        '''
+           --------
+           |      |
+           |      O
+           |     /|\\
+           |     / \\
+           |
+        '''
+    ]
+    return stages[wrong_guesses]
+def word():
+    words=["virat","rohit","hardik","suryakumar","arshdeep","shubman","ishan","dube","ravindra"]
+    return random.choice(words)
+
+def game():
+    print("Welcome to the Hangman Game!! ")
+    name=input("What is your Name? ")
+    chosen_word=word()
+    max_wrong_guesses=6
+    wrong_guesses=0
+    guessed_letters=""
+    bool_count=0
+    while(wrong_guesses<max_wrong_guesses):
+        letter=input("Enter a guess letter: ")
+        letter=letter.lower()
+        if letter in guessed_letters:
+            print("You chosed that letter already")
+            continue
+
+        elif letter in chosen_word:
+            guessed_letters+=letter
+            for c in chosen_word:
+                if(letter==c):
+                    bool_count+=1
+            print(display_hangman(wrong_guesses))
+
+        else:
+            guessed_letters+=letter
+            wrong_guesses+=1
+            print(display_hangman(wrong_guesses))
+
+    if(bool_count==len(chosen_word)):
+        print("Congratulations!! ",name," You won The Game")
+    else:
+        print("Better Luck Next Time ",name,"\n The correct word was ",chosen_word)
+game()
+
+
+
+
+
+
+
+
+
+
+
